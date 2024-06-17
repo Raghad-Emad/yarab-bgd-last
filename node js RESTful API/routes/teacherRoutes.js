@@ -10,16 +10,6 @@ const { check, validationResult } = require("express-validator");
 const JWT = require("jsonwebtoken");
 const checkAuth = require("../middleware/checkAuth");
 
-// // Welcome route
-// router.get("/", (req, res) => {
-//   res.send("Welcome to the teacher API!");
-// });
-
-// // Protected route using checkAuth middleware
-// router.get('/protected-route', checkAuth, (req, res) => {
-//   res.json({ message: 'This is a protected route' });
-// });
-
 // Get teacher details
 router.route("/").get(checkAuth, async (req, res) => {
   //get these values from check auth (JWT)
@@ -96,7 +86,6 @@ router
         phonenumber: req.body.phonenumber,
         // password: req.body.password,
       };
-      // const query = `UPDATE teachers SET Email = '${data.email}', Name = '${data.email}',Password = '${data.password}' WHERE id = ${req.params.id}`;
       const query = `CALL update_teacher ( "${oEmail}", "${oPassword}", "${data.fName}", "${data.lName}", "${data.email}","${data.phonenumber}")`;
       console.log(query);
       const [results] = await pool.query(query).catch((err) => {

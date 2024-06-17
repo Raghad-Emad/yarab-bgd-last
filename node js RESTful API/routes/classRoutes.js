@@ -26,14 +26,7 @@ router.route("/student").get(checkAuth, async (req, res) => {
     // console.log(results[0]);
     return res.status(200).json({ status: "success", data: results[0] });
   }
-  // pool.query(query, (error, results) => {
-  //   if (results === null) {
-  //     return res.status(204).json({ status: "Not found" });
-  //   } else {
-  //     // console.log(results[0]);
-  //     return res.status(200).json({ status: "success", data: results[0] });
-  //   }
-  // });
+
 });
 
 // Get teachers classes
@@ -54,17 +47,6 @@ router.route("/teacher").get(checkAuth, async (req, res) => {
     return res.status(200).json({ status: "success", data: results[0] });
   }
 
-  // pool.query(query, (error, results) => {
-  //   if (error) {
-  //     return res.status(400).json({ status: "failure", reason: error.code });
-  //   } else {
-  //     if (results === null) {
-  //       return res.status(204).json({ status: "Not found" });
-  //     } else {
-  //       return res.status(200).json({ status: "success", data: results[0] });
-  //     }
-  //   }
-  // });
 });
 
 //create class
@@ -103,19 +85,7 @@ router
           data: data,
           message: "created class",
         });
-        // pool.query(query, (error, results) => {
-        //   if (error) {
-        //     return res
-        //       .status(400)
-        //       .json({ status: "failure", reason: error.code });
-        //   } else {
-        //     return res.status(201).json({
-        //       status: "success",
-        //       data: data,
-        //       message: "created class",
-        //     });
-        //   }
-        // });
+       
       } catch (err) {
         return res.status(500).send(err);
       }
@@ -161,19 +131,7 @@ router
           data: data,
           message: "created class",
         });
-        // pool.query(query, (error, results) => {
-        //   if (error) {
-        //     return res
-        //       .status(400)
-        //       .json({ status: "failure", reason: error.code });
-        //   } else {
-        //     return res.status(201).json({
-        //       status: "success",
-        //       data: data,
-        //       message: "created class",
-        //     });
-        //   }
-        // });
+
       } catch (err) {
         return res.status(500).send(err);
       }
@@ -212,18 +170,6 @@ router
           message: "Class successfully deleted",
         });
 
-        // pool.query(query, (error, results) => {
-        //   if (error) {
-        //     return res
-        //       .status(400)
-        //       .json({ status: "failure", reason: error.code });
-        //   } else {
-        //     return res.status(201).json({
-        //       status: "success",
-        //       message: "Class successfully deleted",
-        //     });
-        //   }
-        // });
       } catch (err) {
         return res.status(500).send(err);
       }

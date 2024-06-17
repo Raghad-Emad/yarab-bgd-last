@@ -4,12 +4,10 @@ if (process.env.NODE_ENV != "production") {
 const JWT = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
-  // const token = req.header("x-auth-token");
+
 
   // get token from header
   const token = req.header("autherization");
-  // const authHeader = req.header("autherization");
-  // const token = authHeader && authHeader.split(" ")[1];
 
   // check if token is present
   if (!token) {

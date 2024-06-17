@@ -5,10 +5,7 @@ if (process.env.NODE_ENV != "production") {
 const express = require("express");
 const router = express.Router();
 const pool = require("../config/db");
-// const bcrypt = require("bcrypt");
-// const { check, validationResult } = require("express-validator");
-// const JWT = require("jsonwebtoken");
-// const checkAuth = require("../middleware/checkAuth");
+
 
 router.route("/").get(async (req, res) => {
   const query = `CALL Monthly_signups()`;

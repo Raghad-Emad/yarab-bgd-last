@@ -48,38 +48,6 @@ router.route("/login").post(async (req, res) => {
     }
   }
 
-  // pool.query(query, async (error, results) => {
-  //   console.log(query);
-  //   if (error) {
-  //     return res.status(500).json({ status: "failure", reason: error.code });
-  //   }
-  //   if (!results[0]) {
-  //     // no students with that email
-  //     return res.status(401).json({ status: "Email or Password incorrect" });
-  //   } else {
-  //     try {
-  //       // compare input password with password on database
-  //       if (await bcrypt.compare(req.body.password, results[0].Password)) {
-  //         data.password = results[0].Password;
-  //         // create jwt of email and password with a predefined expiry time
-  //         const token = await JWT.sign({ data }, process.env.SECURE_KEY, {
-  //           expiresIn: parseInt(process.env.EXPIRES_IN),
-  //         });
-  //         // return token
-  //         return res.status(200).json({
-  //           message: "Successfull login",
-  //           token: token,
-  //         });
-  //       } else {
-  //         return res
-  //           .status(401)
-  //           .json({ status: "Email or Password incorrect" });
-  //       }
-  //     } catch {
-  //       return res.status(404).json({ status: "error occured" });
-  //     }
-  //   }
-  // });
 });
 
 //update admin , delete admin
@@ -117,15 +85,6 @@ router
       });
       return res.status(200).json({ status: "success", data: data });
 
-      // pool.query(query, (error) => {
-      //   if (error) {
-      //     return res
-      //       .status(400)
-      //       .json({ status: "failure", reason: error.code });
-      //   } else {
-      //     return res.status(200).json({ status: "success", data: data });
-      //   }
-      // });
     }
   )
   .delete(checkAuth, async (req, res) => {
@@ -142,16 +101,7 @@ router
       status: "success",
       message: `deleted user: ${oEmail}`,
     });
-    // pool.query(query, (error) => {
-    //   if (error) {
-    //     return res.status(400).json({ status: "failure", reason: error.code });
-    //   } else {
-    //     return res.status(200).json({
-    //       status: "success",
-    //       message: `deleted user: ${oEmail}`,
-    //     });
-    //   }
-    // });
+
   });
 
 //create admin
@@ -191,16 +141,6 @@ router
           return res.status(400).json({ status: "failure", reason: err });
         });
         return res.status(201).json({ status: "success" });
-
-        // pool.query(query, (error) => {
-        //   if (error) {
-        //     return res
-        //       .status(400)
-        //       .json({ status: "failure", reason: error.code });
-        //   } else {
-        //     return res.status(201).json({ status: "success" });
-        //   }
-        // });
       } catch (err) {
         return res.status(500).send(err);
       }
@@ -262,15 +202,6 @@ router
         });
         return res.status(200).json({ status: "success" });
 
-        // pool.query(query, (error) => {
-        //   if (error) {
-        //     return res
-        //       .status(400)
-        //       .json({ status: "failure", reason: error.code });
-        //   } else {
-        //     return res.status(200).json({ status: "success" });
-        //   }
-        // });
       } catch (err) {
         console.log(err);
         return res.status(500).send(err);
@@ -291,13 +222,6 @@ router.route("/details").get(checkAuth, async (req, res) => {
   });
   return res.status(200).json({ status: "success", data: results[0] });
 
-  // pool.query(query, (error, results) => {
-  //   if (results === null) {
-  //     return res.status(204).json({ status: "Not found" });
-  //   } else {
-  //     return res.status(200).json({ status: "success", data: results[0] });
-  //   }
-  // });
 });
 
 module.exports = router;

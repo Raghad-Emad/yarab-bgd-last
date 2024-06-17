@@ -52,24 +52,6 @@ router
           // throw err;
           return res.status(400).json({ status: "failure", reason: err });
         });
-
-        // //get students from class
-        // let query = `CALL teacher_get_students_by_class ("${data.classID}", "${email}", "${password}")`;
-        // const [users] = await pool.query(query).catch((err) => {
-        //   // throw err;
-        //   return res.status(400).json({ status: "failure", reason: err });
-        // });
-        // console.log(users);
-        // await users.map(async (user) => {
-        //   // assign students to class
-        //   let query = `CALL assignment_quiz_create (${user.StudentID},${data.quizID},"${email}","${password}")`;
-        //   console.log(query);
-        //   await pool.query(query).catch((err) => {
-        //     // throw err;
-        //     return res.status(400).json({ status: "failure", reason: err });
-        //   });
-        // });
-
         return res.status(200).json({
           status: "success",
         });
@@ -229,9 +211,6 @@ router
         status: "success",
         data: progress,
       });
-      // } catch (err) {
-      //   return res.status(500).send(err);
-      // }
     }
   );
 

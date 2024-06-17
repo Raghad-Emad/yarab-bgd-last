@@ -12,53 +12,6 @@ const checkAuth = require("../middleware/checkAuth");
 const { check, validationResult } = require("express-validator");
 const { requiredXp } = require("../LevelSystem/Level");
 
-// router.route("/login").post(async (req, res) => {
-  // data = {
-  //   email: req.body.email,
-  //   password: req.body.password,
-  // };
-  // // get all students from database with corresponding email
-  // const query = `SELECT * FROM students WHERE email = "${data.email}"`;
-  // const [results] = await pool.query(query).catch((err) => {
-  //   // throw err;
-  //   console.log("something went wrong");
-  //   return res.status(400).json({ status: "failure", reason: err });
-  // });
-  // console.log(results);
-  // // if (error) {
-  // //   return res.status(500).json({ status: "failure", reason: error.code });
-  // // }
-  // if (!results[0]) {
-  //   // no students with that email
-  //   return res.status(401).json({ status: "Email or Password incorrect" });
-  // } else {
-  //   try {
-  //     console.log("result found");
-  //     // compare input password with password on database
-  //     if (await bcrypt.compare(req.body.password, results[0].Password)) {
-  //       console.log("doing bcrypt");
-  //       data.password = results[0].Password;
-  //       console.log("getting password");
-  //       console.log(data);
-  //       console.log("secure key: ", process.env.SECURE_KEY);
-  //       // create jwt of email and password with a predefined expiry time
-  //       const token = await JWT.sign({ data }, process.env.SECURE_KEY, {
-  //         // expiresIn: parseInt(process.env.EXPIRES_IN),
-  //       });
-  //       console.log("this is token:", token);
-  //       return res.status(200).json({
-  //         status: "success",
-  //         message: "Successfull login",
-  //         token: token,
-  //         // refreshToken: refreshToken,
-  //       });
-  //     } else {
-  //       return res.status(401).json({ status: "Email or Password incorrect" });
-  //     }
-  //   } catch {
-  //     return res.status(404).json({ status: "error occured" });
-  //   }
-  // }
   router.post('/login', async (req, res) => {
     
     try {
@@ -155,7 +108,6 @@ router
     const oPassword = req.user.password;
     const query = `CALL delete_student ( "${oEmail}", "${oPassword}")`;
     const result = await pool.query(query).catch((err) => {
-      // throw err;
       return res.status(400).json({ status: "failure", reason: err });
     });
     return res.status(200).json({
@@ -165,10 +117,6 @@ router
     
   });
 
-// router.route('/')
-//   .put(checkAuth, (req, res) => {
-//     res.send('Authenticated!');
-//   });
 
 //update profile picture
 router

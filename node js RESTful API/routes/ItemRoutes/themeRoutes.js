@@ -243,8 +243,6 @@ router.route("/admin").post(
         });
       }
 
-      // const query = `CALL Themes_delete ("${email}", "${password}",${themeID})`;
-      // const query = `CALL Themes_add (${data.themeID}, "${data.name}", "${data.details}", "${data.primaryColor}", "${data.backgroundColor}", "${data.isDark}", ${data.cost}, ${data.reqLevel})`;
       const query = `CALL Themes_add ("${email}","${password}","${data.name}", "${data.details}", "${data.primaryColor}", "${data.backgroundColor}", "${data.btnTextColor}","${data.isDark}", ${data.cost}, ${data.reqLevel})`;
 
       const results = await pool.query(query).catch((err) => {
@@ -301,9 +299,6 @@ router
             errors: errs.array(),
           });
         }
-
-        // const query = `CALL Themes_delete ("${email}", "${password}",${themeID})`;
-        // const query = `CALL Themes_add (${data.themeID}, "${data.name}", "${data.details}", "${data.primaryColor}", "${data.backgroundColor}", "${data.isDark}", ${data.cost}, ${data.reqLevel})`;
         const query = `CALL Themes_edit ("${email}","${password}",${data.themeID},"${data.name}", "${data.details}", "${data.primaryColor}", "${data.backgroundColor}", "${data.btnTextColor}","${data.isDark}", ${data.cost}, ${data.reqLevel})`;
 
         const results = await pool.query(query).catch((err) => {
