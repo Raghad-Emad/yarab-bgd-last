@@ -51,7 +51,7 @@ router.route("/teacher").get(checkAuth, async (req, res) => {
 
 //create class
 router
-  .route("/")
+  .route("/classes")
   .post(
     [
       check("name", "A class name is required").not().isEmpty(),

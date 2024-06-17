@@ -9,15 +9,14 @@ import {
   AiOutlineShrink,
   AiOutlineClose,
 } from "react-icons/ai";
-import AddClass from "../../Components/TeacherProfile/DetailsBox/AddClass";
-import ClassDetails from "../../Components/TeacherProfile/DetailsBox/ClassDetails";
+import AddClass from "../../Components/OperationProfile/DetailsBox/AddClass";
+import ClassDetails from "../../Components/OperationProfile/DetailsBox/ClassDetails";
 import {
   getTeachersClasses,
   getTeachersDetails,
-} from "../../http_Requests/teacherRequests";
+} from "../../http_Requests/operationRequests";
 
-
-const Classes = () => {
+export const Classes = () => {
   const [classes, setClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState();
   const [classSuccess, setClassSuccess] = useState(false);
@@ -32,13 +31,10 @@ const Classes = () => {
 
   const navigate = useNavigate();
 
+
   useEffect(() => {
     classChanged();
   }, [selectedClass]);
-
-  //   useEffect(async () => {
-  //     await getDetails();
-  //   }, []);
 
   const classChanged = () => {
     setClassSuccess(!classSuccess);
@@ -122,10 +118,8 @@ const Classes = () => {
         ) : (
           <></>
         )}
-       
+      
       </div>
     </div>
   );
 };
-
-export default Classes;

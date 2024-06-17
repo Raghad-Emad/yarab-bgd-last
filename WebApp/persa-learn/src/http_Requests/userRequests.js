@@ -2,8 +2,6 @@ import { hostAddress } from "../config/hostAddress";
 
 export const checkTokenCorrect = (status) => {
   status.then((value) => {
-    // console.log(value.errors[0].message);
-    // ask to log back in if token invalid
     if (
       value.hasOwnProperty("errors") &&
       value.errors[0].message === "Invalid Token"
@@ -25,29 +23,6 @@ export const loginUser = async (credentials, isTeacher, isAdmin) => {
     url = `${hostAddress()}/student/login`;
   }
   console.log("Login credentials:", credentials);
-
-  // const response = await fetch(url, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(credentials),
-  // })
-  // .then((data) => data.json());
-
-
-// const data = await response.json();
-// console.log("Login response data:", data); 
-
-//   if (response.ok && data.token) {
-//     const token = data.token;
-//     sessionStorage.setItem("token", JSON.stringify(token));
-//     console.log("Token stored:", token);
-//   } else {
-//     // throw new Error(data.message);
-//     console.error("Failed to login or missing token in response:", data);
-//     throw new Error(data.message || "Failed to login");
-//   }
 
 try {
     const response = await fetch(url, {
@@ -99,7 +74,8 @@ export const signUpUser = (credentials, isTeacher) => {
   let url;
   if (isTeacher) {
     url = `${hostAddress()}/teacher/create`;
-  } else {
+  } 
+  else {
     url = `${hostAddress()}/student/create`;
     
   }
@@ -133,9 +109,21 @@ export const getUserDetails = () => {
       "Content-Type": "application/json",
       autherization: token,
     },
-  }).then((data) => data.json());
-  checkTokenCorrect(data);
-  return data;
+  })
+//   .then((data) => data.json());
+//   checkTokenCorrect(data);
+//   return data;
+// };
+
+.then((data) => {
+  console.log("Response status:", data.status);
+  
+  return data.json();
+})
+.catch(error => {
+  console.error("Error during sign up:", error);
+  throw error; // Re-throw the error to handle it further up the call stack
+});
 };
 
 export const getStudentsAssignmentQuizzes = () => {

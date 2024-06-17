@@ -17,7 +17,7 @@ router.route("/").get(checkAuth, async (req, res) => {
   const password = req.user.password;
 
   const query = `CALL details_teacher("${email}", "${password}")`;
-  const [[[details]]] = await pool.query(query).catch((err) => {
+  const details = await pool.query(query).catch((err) => {
     // throw err;
     return res.status(400).json({ status: "failure", reason: err });
   });
@@ -30,39 +30,57 @@ router.route("/").get(checkAuth, async (req, res) => {
 
 
 router.route("/login").post(async (req, res) => {
-  data = {
-    email: req.body.email,
-    password: req.body.password,
-  };
+ 
+
+  try {
+  const { email, password } = req.body;
+
   // const query = "SELECT * FROM teachers WHERE email = ?";
-  const query = `SELECT * FROM teachers WHERE email = "${data.email}"`;
-  const [results] = await pool.query(query).catch((err) => {
+  const query = `SELECT * FROM teachers WHERE email = ?`;
+  const results= await pool.query(query, email).catch((err) => {
     // throw err;
     console.log("something went wrong");
     return res.status(400).json({ status: "failure", reason: err });
   });
-  if (!results[0]) {
-    return res.status(401).json({ status: "Email not found" });
-  } else {
-    try {
-      if (await bcrypt.compare(req.body.password, results[0].Password)) {
-        data.password = results[0].Password;
-        const token = await JWT.sign({ data }, process.env.SECURE_KEY, {
-          expiresIn: parseInt(process.env.EXPIRES_IN),
-        });
+
+  if (results.length === 0) {
+    return res.status(401).json({ status: 'failure', message: 'Email or Password incorrect' });
+  } 
+
+  const user = results[0];
+  console.log("User found:", user);
+
+  // Compare input password with password in the database
+  const isMatch = await bcrypt.compare(password, user.Password);
+  if (!isMatch) {
+    console.log("Password mismatch for user:", email);
+    return res.status(401).json({ status: 'failure', message: 'Email or Password incorrect' });
+  }
+
+  console.log("Password matched for user:", email);
+
+  // Create JWT of email and password with a predefined expiry time
+  const token = JWT.sign({ data: { email: user.Email, id: user.StudentID } }, process.env.SECURE_KEY, {
+  expiresIn: parseInt(process.env.EXPIRES_IN),
+});
+
+console.log("Generated token for user:", token);
+
+  
+  
+    
         return res.status(200).json({
           status: "success",
           message: "Successfull login",
           token: token,
         });
-      } else {
-        return res.status(401).json({ status: "Password not matching" });
+      } 
+      catch (err) {
+        console.error('Login error:', err);
+        return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
       }
-    } catch {
-      return res.status(404).json({ status: "error occured" });
-    }
   }
-});
+);
 
 router
   .route("/update")
@@ -205,18 +223,20 @@ router
           password: hashedPassword,
           phoneNumber: req.body.phonenumber,
         };
-        email = data.email;
-
+    
         const query = `CALL create_teacher ("${data.firstName}", "${data.lastName}", "${data.email}", "${data.password}","${data.phoneNumber}")`;
         console.log(query);
-        const [result] = await pool.query(query).catch((err) => {
-          // throw err;
-          return res.status(400).json({ status: "failure", reason: err });
-        });
-        return res.status(201).json({ status: "success" });
-
-      
+        // Execute the query and handle potential errors
+        try {
+          await pool.query(query);
+          return res.status(201).json({ status: "success" });
+        } catch (queryError) {
+          console.error(queryError); // Log the error for debugging
+          return res.status(400).json({ status: "failure", reason: queryError });
+        }
+        
       } catch (err) {
+        console.error(err); // Log the error for debugging
         return res.status(500).send(err);
       }
     }

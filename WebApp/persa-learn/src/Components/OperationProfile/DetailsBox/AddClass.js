@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createClass } from "../../../http_Requests/teacherRequests";
+import { createClass } from "../../../http_Requests/operationRequests";
 import styles from "./AddClass.module.css";
 import CustomButton from "../../CustomButton";
 import CustomInput from "../../CustomInput";
@@ -12,7 +12,7 @@ const AddClass = ({ flipAddClass, classChanged }) => {
     let details = { name: className, year: yearGroup };
     let data = await createClass(details);
     console.log(data);
-    if (data && data.status === "success") {
+    if (data.status === "success") {
       console.log("class created successfully");
       classChanged();
       flipAddClass();

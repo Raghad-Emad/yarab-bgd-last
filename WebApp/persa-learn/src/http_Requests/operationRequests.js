@@ -1,41 +1,26 @@
 import { hostAddress } from "../config/hostAddress";
 import { checkTokenCorrect } from "./userRequests";
 
-export const getTeachersDetails = () => {
+export const getOperationsDetails = () => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  // const data = fetch("http://localhost:8080/teacher/classes", {
-  const data = fetch(`${hostAddress()}/teacher/classes`, {
+  const data = fetch(`${hostAddress()}/operations`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
-  })
-//   .then((data) => data.json());
-//   checkTokenCorrect(data);
-//   return data;
-// };
-
-.then((data) => {
-  console.log("Response status:", data.status);
-  
-  console.log(data);
-  return data.json();
-})
-.catch(error => {
-  console.error("Error during sign up:", error);
-  throw error; // Re-throw the error to handle it further up the call stack
-});
+  }).then((data) => data.json());
+  checkTokenCorrect(data);
+  return data;
 };
 
-export const editTeachers = (credentials) => {
+export const editOperations = (credentials) => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  // const data = fetch("http://localhost:8080/teacher/classes", {
-  const data = fetch(`${hostAddress()}/teacher/update`, {
+  const data = fetch(`${hostAddress()}/operations/update`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(credentials),
   }).then((data) => data.json());
@@ -43,13 +28,13 @@ export const editTeachers = (credentials) => {
   return data;
 };
 
-export const editPasswordTeachers = (credentials) => {
+export const editPasswordOperations = (credentials) => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  const data = fetch(`${hostAddress()}/teacher/update/password`, {
+  const data = fetch(`${hostAddress()}/operations/update/password`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(credentials),
   }).then((data) => data.json());
@@ -57,28 +42,26 @@ export const editPasswordTeachers = (credentials) => {
   return data;
 };
 
-export const deleteTeacher = () => {
+export const deleteOperation = () => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  // const data = fetch("http://localhost:8080/teacher/classes", {
-  const data = fetch(`${hostAddress()}/teacher/update`, {
+  const data = fetch(`${hostAddress()}/operations/update`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
   }).then((data) => data.json());
   checkTokenCorrect(data);
   return data;
 };
 
-export const getTeachersClasses = () => {
+export const getOperationsClasses = () => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  // const data = fetch("http://localhost:8080/teacher/classes", {
-  const data = fetch(`${hostAddress()}/classes/teacher`, {
+  const data = fetch(`${hostAddress()}/classes/operations`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
   }).then((data) => data.json());
   checkTokenCorrect(data);
@@ -87,11 +70,11 @@ export const getTeachersClasses = () => {
 
 export const allStudents = () => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  const data = fetch(`${hostAddress()}/teacher/students/all`, {
+  const data = fetch(`${hostAddress()}/operations/students/all`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
   }).then((data) => data.json());
   checkTokenCorrect(data);
@@ -100,11 +83,11 @@ export const allStudents = () => {
 
 export const searchStudents = (searchTerm) => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  const data = fetch(`${hostAddress()}/teacher/search`, {
+  const data = fetch(`${hostAddress()}/operations/search`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify({ searchTerm: searchTerm }),
   }).then((data) => data.json());
@@ -114,11 +97,11 @@ export const searchStudents = (searchTerm) => {
 
 export const addStudentToClass = (details) => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  const data = fetch(`${hostAddress()}/teacher/classes/assign`, {
+  const data = fetch(`${hostAddress()}/operations/classes/assign`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(details),
   }).then((data) => data.json());
@@ -129,11 +112,11 @@ export const addStudentToClass = (details) => {
 export const removeStudentFromClass = (details) => {
   console.log(details);
   const token = JSON.parse(sessionStorage.getItem("token"));
-  const data = fetch(`${hostAddress()}/teacher/classes/remove`, {
+  const data = fetch(`${hostAddress()}/operations/classes/remove`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(details),
   }).then((data) => data.json());
@@ -143,41 +126,25 @@ export const removeStudentFromClass = (details) => {
 
 export const createClass = (details) => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  // const data = fetch("http://localhost:8080/teacher/classes", {
-  const data = fetch(`${hostAddress()}/class/classdetails`, {
+  const data = fetch(`${hostAddress()}/classes`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(details),
-  })
-//   .then((data) => data.json());
-//   // checkTokenCorrect(data);
-//   return data;
-// };
-
-.then((data) => {
-  console.log("Response status:", data.status);
-  
-  console.log(data);
+  }).then((data) => data.json());
+  checkTokenCorrect(data);
   return data;
-})
-.catch(error => {
-  console.error("Error during sign up:", error);
-  throw error; // Re-throw the error to handle it further up the call stack
-});
 };
-
 
 export const updateClass = (details) => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  // const data = fetch("http://localhost:8080/teacher/classes", {
   const data = fetch(`${hostAddress()}/classes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(details),
   }).then((data) => data.json());
@@ -191,7 +158,7 @@ export const deleteClass = (details) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(details),
   }).then((data) => data.json());
@@ -201,11 +168,11 @@ export const deleteClass = (details) => {
 
 export const getStudentsInClass = (classID) => {
   const token = JSON.parse(sessionStorage.getItem("token"));
-  const data = fetch(`${hostAddress()}/teacher/class`, {
+  const data = fetch(`${hostAddress()}/operations/class`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(classID),
   }).then((data) => data.json());
@@ -219,7 +186,7 @@ export const createTheQuiz = (credentials) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(credentials),
   }).then((data) => data.json());
@@ -233,7 +200,7 @@ export const deleteTheQuiz = (credentials) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(credentials),
   }).then((data) => data.json());
@@ -241,20 +208,20 @@ export const deleteTheQuiz = (credentials) => {
   return data;
 };
 
-export const viewTeachersQuizzes = () => {
+export const viewOperationsQuizzes = () => {
   const token = JSON.parse(sessionStorage.getItem("token"));
   const data = fetch(`${hostAddress()}/quiz/all`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
   }).then((data) => data.json());
   checkTokenCorrect(data);
   return data;
 };
 
-export const viewTeachersQuizzesByClass = (credentials) => {
+export const viewOperationsQuizzesByClass = (credentials) => {
   console.log("aaa", credentials);
   const token = JSON.parse(sessionStorage.getItem("token"));
   const data = fetch(
@@ -263,22 +230,21 @@ export const viewTeachersQuizzesByClass = (credentials) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        autherization: token,
+        authorization: token,
       },
-      //body: JSON.stringify(credentials),
     }
   ).then((data) => data.json());
   checkTokenCorrect(data);
   return data;
 };
 
-export const viewTeachersModules = () => {
+export const viewOperationsModules = () => {
   const token = JSON.parse(sessionStorage.getItem("token"));
   const data = fetch(`${hostAddress()}/module/view`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
   }).then((data) => data.json());
   checkTokenCorrect(data);
@@ -291,7 +257,7 @@ export const createModule = (credentials) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      autherization: token,
+      authorization: token,
     },
     body: JSON.stringify(credentials),
   }).then((data) => data.json());

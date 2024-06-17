@@ -214,9 +214,9 @@ const SignUpBox = ({ setSignUp, isTeacher }) => {
   const signUp = async (e) => {
     e.preventDefault();
 
-    // Log the token
-  const token = JSON.parse(sessionStorage.getItem("token"));
-  console.log("Token:", token);
+  //   // Log the token
+  // const token = JSON.parse(sessionStorage.getItem("token"));
+  // console.log("Token:", token);
 
     // Validation logic
     if (!email) {

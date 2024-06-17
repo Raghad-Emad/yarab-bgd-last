@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import ClassItem from "../../Components/TeacherProfile/ClassList/ClassItem";
 import {
   getTeachersClasses,
-  getTeachersDetails,
-} from "../../http_Requests/teacherRequests";
+  getOperationsDetails,
+} from "../../http_Requests/operationRequests";
 import { useNavigate } from "react-router-dom";
 import ClassDetails from "../../Components/TeacherProfile/DetailsBox/ClassDetails";
 import AddClass from "../../Components/TeacherProfile/DetailsBox/AddClass";
 import ClassList from "../../Components/TeacherProfile/ClassList/ClassList";
 
 import styles from "./TeacherProfile.module.css";
+import CustomButton from "../../Components/CustomButton";
 import BarStacked from "../../Components/Charts/BarStacked";
 import BarChart from "../../Components/Charts/BarChart";
 import {
   getAllAssignmentProgress,
   getAllAssignmentRatings,
 } from "../../http_Requests/TeacherRequests/StatRequests";
-import CustomButton from "../../Components/CustomButton";
 
 const TeacherProfile = () => {
   const [firstName, setFirstName] = useState();
@@ -27,7 +27,7 @@ const TeacherProfile = () => {
 
   // const [usersName, setUsersName] = useState();
   const getDetails = async () => {
-    const data = await getTeachersDetails();
+    const data = await getOperationsDetails();
     if (data.status === "success") {
       setFirstName(data.details.FirstName);
     }
@@ -150,11 +150,11 @@ const TeacherProfile = () => {
             />
           </div>
         </div>
-        <h3>Details</h3>
+        {/* <h3>Details</h3>
         <CustomButton
           text={"My details"}
           onClick={() => navigate("/details_teacher", {})}
-        />
+        /> */}
       </div>
     </div>
   );

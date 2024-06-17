@@ -17,15 +17,11 @@ const { requiredXp } = require("../LevelSystem/Level");
     try {
       const { email, password } = req.body;
       console.log("Login attempt with email:", email);
-    console.log("SECURE_KEY:", process.env.SECURE_KEY); // Log the SECURE_KEY
-      // // Get all students from the database with the corresponding email
-      // const [results] = await pool.query('SELECT * FROM students WHERE email = ?', [email]);
+      console.log("SECURE_KEY:", process.env.SECURE_KEY); // Log the SECURE_KEY
 
           // Query to find the student with the provided email
     const query = `SELECT * FROM students WHERE email = ?`;
     const results = await pool.query(query, email);
-
-
   
       // If no students found with that email
       if (results.length === 0) {

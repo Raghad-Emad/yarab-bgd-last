@@ -38,7 +38,7 @@ import TeacherDetails from "./Pages/Teacher/TeacherDetails";
 import TeacherEdit from "./Pages/Teacher/TeacherEdit";
 import QuizEdit from "./Pages/ActivityDesigner/Quiz/QuizEdit";
 import AssignmentSubmissions from "./Pages/Teacher/AssignmentSubmissions";
-import { Classes } from "./Pages/Teacher/Classes";
+import  Classes  from "./Pages/Teacher/Classes";
 import { default as StudentsClasses } from "./Pages/Student/Classes";
 import ShopManagement from "./Components/Admin/ShopManagement";
 import AccountActions from "./Components/Admin/AccountActions";
@@ -143,7 +143,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Navbar /> */}
+        <Navbar />
 
         <Routes>
           {/* shared routes */}
@@ -248,7 +248,7 @@ function App() {
           {/* temp routes */}
           {/* <Route exact path="/create" element={<CreateActivity />} /> */}
         </Routes>
-       
+       <Footer/>
       </Router>
     </div>
   );

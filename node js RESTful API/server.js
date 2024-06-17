@@ -13,6 +13,8 @@ const jwt = require("jsonwebtoken");
 const studentRouter = require("./routes/studentRoutes");
 const teacherRouter = require("./routes/teacherRoutes");
 const adminRouter = require("./routes/adminRoutes");
+const teacherStatRouter = require("./routes/teacherStatRoutes");
+const operationRouter = require("./routes/operationRoutes");
 const assignmentsRouter = require("./routes/assignmentsRoutes");
 const classesRouter = require("./routes/classRoutes");
 const classRequestRouter = require("./routes/ClassRoutes/ClassRequestsRoutes");
@@ -26,7 +28,6 @@ const ratingRouter = require("./routes/ActivityRoutes/ratingRoutes");
 const adminStatRouter = require("./routes/adminStatRoutes");
 const submissionRouter = require("./routes/submissionRoutes");
 const feedRouter = require("./routes/feedRoutes");
-const teacherStatRouter = require("./routes/teacherStatRoutes");
 // const protectedRoutes = require('./routes/protectedRoutes');
 
 
@@ -46,6 +47,7 @@ console.log('Current working directory:', process.cwd());
 app.use("/student", studentRouter);
 app.use("/teacher", teacherRouter);
 app.use("/admin", adminRouter);
+app.use("/operation", operationRouter)
 app.use("/assignments", assignmentsRouter);
 app.use("/classes", classesRouter);
 app.use("/classRequests", classRequestRouter);
