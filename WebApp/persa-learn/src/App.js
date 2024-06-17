@@ -22,6 +22,7 @@ import TeacherProfile from "./Pages/Teacher/TeacherProfile";
 
 //components
 import Navbar from "./Components/Navbar";
+import Footer from './Components/Footer'
 import UserSettings from "./Pages/UserSettings";
 import EditUserSettings from "./Pages/EditUserSettings";
 import AssignActivities from "./Pages/AssignActivities/AssignActivities";
@@ -44,6 +45,9 @@ import AccountActions from "./Components/Admin/AccountActions";
 import CreateAdmin from "./Components/Admin/CreateAdmin";
 import EditAccountSettings from "./Pages/Admin/EditAccountSettings";
 import Landing from "./Pages/Landing";
+
+
+import CourseDetails from './Components/Landing/CourseDetails';
 
 function App() {
   const { token, setToken } = useToken();
@@ -109,14 +113,14 @@ function App() {
     return (
       <div className="App">
         <Router>
-          {/* <Navbar /> */}
+          <Navbar />
           <Routes>
             <Route
               exact
               path="/"
               element={
                 <>
-                  <Navbar /> <Landing />
+                 <Landing />
                 </>
               }
             />
@@ -126,7 +130,11 @@ function App() {
               element={<Login setToken={setToken} />}
             />
             <Route path="*" element={<Login setToken={setToken} />} />
+            <Route path="/" element={<Landing />} />
+          <Route path="/course/:courseName" element={<CourseDetails />} />
+          {/* <Route path="/contact" element={<ContactUsPage />} /> */}
           </Routes>
+          <Footer/>
         </Router>
       </div>
     );
@@ -135,7 +143,8 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
+        {/* <Navbar /> */}
+
         <Routes>
           {/* shared routes */}
           {/* <Route exact path="/" element={<Home setToken={setToken} />} /> */}
@@ -173,6 +182,7 @@ function App() {
               />
               <Route exact path="/shop" element={<Shop />} />
               <Route exact path="/revision" element={<Activities />} />
+              {/* <Route path="/zoom-meeting" element={<ZoomMeetingPage/>} />  */}
             </>
           ) : (
             <></>
@@ -238,6 +248,7 @@ function App() {
           {/* temp routes */}
           {/* <Route exact path="/create" element={<CreateActivity />} /> */}
         </Routes>
+       
       </Router>
     </div>
   );

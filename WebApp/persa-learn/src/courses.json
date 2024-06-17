@@ -1,0 +1,40 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "courseId": 1,
+      "courseName": "Front-End Development",
+      "courseTitle": "Master Responsive Web Design in Front-End Development",
+      "description": "Explore the significance of responsive web design in front-end development and how it enhances user experience across different devices",
+      "price": 12000,
+      "category": "Design"
+    },
+    {
+      "id": 2,
+      "courseId": 2,
+      "courseName": "Backend Development",
+      "courseTitle": "Backend Development Essentials",
+      "description": "Delve into the world of backend development and understand its crucial role in powering web applications. Discover various backend technologies, frameworks, and databases, and learn how they work together to handle data, security, and business logic",
+      "price": 15000,
+      "category": "Development"
+    },
+    {
+      "id": 3,
+      "courseId": 3,
+      "courseName": " Artificial Intelligence",
+      "courseTitle": "Unlocking the Potential of AI Applications",
+      "description": "Discover the limitless possibilities of artificial intelligence (AI) in today's world. Explore real-world applications of AI in different industries, such as healthcare, finance",
+      "price": 18000,
+      "category": "Data Science"
+    },
+    {
+      "id": 4,
+      "courseId": 4,
+      "courseName": "Digital Marketing",
+      "courseTitle": "Effective Digital Marketing Techniques",
+      "description": "Unleash the power of digital marketing to drive business growth in the digital era. Learn about various digital marketing channels",
+      "price": 10000,
+      "category": "Digital Marketing"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+.jumbotron {
+  color: black;
+  text-align: center;
+}
+
+ul.list-inline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px; /* Added padding */
+  margin: 20px 0; /* Added margin */
+  list-style: none;
+}
+
+ul.list-inline li {
+  border: 1px solid black !important;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  flex: 1 1 calc(10%- 20px) !important; /* Adjusts the size of each li to fit responsively and accounts for padding */
+  text-align: center;
+  min-width: 120px; /* Ensures a minimum width for each li */
+  height: 50px; /* Added height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-now {
+  border: 1px solid black !important;
+  border-radius: 20px;
+  color: white;
+  min-width: 200px !important;
+  transition: transform 0.4s !important;
+}
+
+.start-now:hover {
+  transform: scale(1.1);
+}
